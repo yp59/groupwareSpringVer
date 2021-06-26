@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <% String root = request.getContextPath(); %>   
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <c:set var ="root" value="${pageContext.request.contextPath}"></c:set>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,9 @@
 	
 	<title>Groupware</title>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
-	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
-	<link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
+	<link rel="stylesheet" type="text/css" href="${root }/css/common.css">
+	<link rel="stylesheet" type="text/css" href="${root }/css/layout.css">
+	<link rel="stylesheet" type="text/css" href="${root }/css/menu.css">
 	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -55,7 +56,7 @@ text-decoration: none;
 	<!-- 로고영역 -->
 			<div class="text-center ">
 				<div class="company-logo">
-				<a href="<%=root%>/index.jsp">GroupWare</a>
+				<a href="${root }/">GroupWare</a>
 				</div>
 
 			</div> 
@@ -69,58 +70,58 @@ text-decoration: none;
 			<!-- 메뉴 -->
 			<ul class="menu">
 			  <li>
-					<a href="<%=root%>/mail/mailSend.jsp">공지 메일</a>
+					<a href="#">공지 메일</a>
 				</li>
 				<li>
-					<a href="<%=root%>/schedule/scheduleList.jsp">일정 목록</a>
+					<a href="#">일정 목록</a>
 				</li>
 				<li>
-					<a href="<%=root%>/address/addressList.jsp">주소록</a>
+					<a href="#">주소록</a>
 				</li>
 				<li>
-					<a href="<%=root%>/massage/massageInsert.jsp">메시지</a>
+					<a href="#">메시지</a>
 					<ul>
-						<li><a href="<%=root%>/massage/massageReceiverList.jsp">수신함</a></li>
-						<li><a href="<%=root%>/massage/massageSenderList.jsp">발신함</a></li>
+						<li><a href="#">수신함</a></li>
+						<li><a href="#">발신함</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="<%=root%>/approval/approvalList.jsp">전자 결재</a>
+					<a href="#">전자 결재</a>
 					<ul>
 
 
 
-						<li><a href="<%=root%>/approval/approvalInsertMain.jsp">기안서 작성</a></li>
-						<li><a href="<%=root%>/approval/approvalList.jsp">내 결재 관리</a></li>
-
-					</ul>
-				</li>
-				<li>
-					<a href="<%=root%>/attendance/attendanceMain.jsp">근태 관리</a>
-					<ul>
-
-						<li><a href="<%=root%>/attendance/attendanceMain.jsp">출퇴근 목록</a></li>
-						<li><a href="<%=root%>/holiday/holidayList.jsp">휴가 목록</a></li>
-
-
+						<li><a href="#">기안서 작성</a></li>
+						<li><a href="#">내 결재 관리</a></li>
 
 					</ul>
 				</li>
 				<li>
-					<a href="<%=root%>/board/boardmain.jsp">게시판</a>
+					<a href="#">근태 관리</a>
 					<ul>
-						<li><a href="<%=root%>/board/boardmainNotice.jsp">공지 게시판</a></li>
-						<li><a href="<%=root%>/board/boardmainQuestion.jsp">질문 게시판</a></li>
-						<li><a href="<%=root%>/board/boardmainFree.jsp">자유 게시판</a></li>
-						<li><a href="<%=root%>/board/myBoardList.jsp">내 게시글</a></li>
+
+						<li><a href="#">출퇴근 목록</a></li>
+						<li><a href="#">휴가 목록</a></li>
+
+
+
 					</ul>
 				</li>
 				<li>
-					<a href="<%=root%>/login/loginInfo.jsp">마이 페이지</a> 
+					<a href="#">게시판</a>
 					<ul>
-						<li><a href="<%=root%>/login/loginInfo.jsp">나의 정보</a></li>
+						<li><a href="#">공지 게시판</a></li>
+						<li><a href="#">질문 게시판</a></li>
+						<li><a href="#">자유 게시판</a></li>
+						<li><a href="#">내 게시글</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">마이 페이지</a> 
+					<ul>
+						<li><a href="#">나의 정보</a></li>
 						<li>
-						<a href="<%=root%>/salary/salaryMain.jsp">나의 급여</a>
+						<a href="#">나의 급여</a>
 						</li>
 						
 					</ul>
