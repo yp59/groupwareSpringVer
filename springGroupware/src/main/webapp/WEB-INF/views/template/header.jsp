@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <c:set var ="root" value="${pageContext.request.contextPath}"></c:set>   
+<c:set var ="isLogin" value="${not empty employeesDto}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,15 +58,18 @@ text-decoration: none;
 	<!-- 로고영역 -->
 			<div class="text-center ">
 				<div class="company-logo">
-				<a href="${root }/">GroupWare</a>
+				<a href="${root}/">GroupWare</a>
 				</div>
 
 			</div> 
 
 				
+			<c:if test="${isLogin}">
+				<div class="loginSub">${employeesDto.empName}님 환영합니다.
+				<a class="logout" href="${root}/logOut">로그아웃</a>
 				
-				
-			
+			</div>
+			</c:if>
 			<!-- 네비게이션 영역 -->
 			<nav>
 			<!-- 메뉴 -->
