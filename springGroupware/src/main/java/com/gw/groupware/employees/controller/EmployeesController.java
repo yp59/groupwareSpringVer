@@ -13,6 +13,7 @@ import com.gw.groupware.employees.model.Dao.EmployeesDao;
 import com.gw.groupware.employees.model.Dto.EmployeesDto;
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeesController {
 
 	

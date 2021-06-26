@@ -50,4 +50,19 @@
 	<annotation-driven/>
 	<resources location="/resources/" mapping="/res/**"></resources>
 	
+	<!-- 
+	
+		인터셉터 설정
+		- EmployeesInterceptor : 비로그인자 접근 차단
+	 -->
+	<interceptors> 
+		<interceptor>
+		
+			<mapping path="/**"/><!-- 컨트롤러에 들어가는 주소 매핑 -->
+			<exclude-mapping path="/employees/loginMain"/>
+			<!-- exclude mapping은 일단 제외-->
+			<beans:bean class="com.gw.groupware.interceptor.EmployeesInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
