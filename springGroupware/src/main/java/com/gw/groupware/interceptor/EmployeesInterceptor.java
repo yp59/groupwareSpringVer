@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.gw.groupware.employees.model.Dto.EmployeesDto;
+import com.gw.groupware.employees.model.entity.EmployeesDto;
 
 public class EmployeesInterceptor implements HandlerInterceptor{
 

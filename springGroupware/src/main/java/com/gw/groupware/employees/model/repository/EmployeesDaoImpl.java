@@ -1,10 +1,10 @@
-package com.gw.groupware.employees.model.Dao;
+package com.gw.groupware.employees.model.repository;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gw.groupware.employees.model.Dto.EmployeesDto;
+import com.gw.groupware.employees.model.entity.EmployeesDto;
 
 @Repository
 public class EmployeesDaoImpl implements EmployeesDao{

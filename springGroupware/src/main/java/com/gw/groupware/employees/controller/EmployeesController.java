@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gw.groupware.employees.model.Dao.EmployeesDao;
-import com.gw.groupware.employees.model.Dto.EmployeesDto;
+import com.gw.groupware.employees.model.entity.EmployeesDto;
+import com.gw.groupware.employees.model.repository.EmployeesDao;
 
 @Controller
 @RequestMapping("/employees")
@@ -32,6 +32,7 @@ public class EmployeesController {
 	 EmployeesDto find = employeesDao.login(employeesDto);	
 	
 	 if(find!=null) {
+		 session.setAttribute("empNo", find.getEmpNo());//session에 로그인 정보를 저장시킨다.
 		 session.setAttribute("employeesDto", find);//session에 로그인 정보를 저장시킨다.
 		 return "redirect:/";
 	 }

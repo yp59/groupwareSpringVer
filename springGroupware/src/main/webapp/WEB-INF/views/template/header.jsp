@@ -96,7 +96,7 @@ text-decoration: none;
 
 
 
-						<li><a href="#">기안서 작성</a></li>
+						<li><a href="${root}/approval/aprrovalInsertMain">기안서 작성</a></li>
 						<li><a href="#">내 결재 관리</a></li>
 
 					</ul>
