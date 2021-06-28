@@ -6,88 +6,9 @@
 <%@ taglib prefix="f" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="isSearch" value="${not empty param.keyword}"></c:set>
   
-<%/*
-	String id = (String) session.getAttribute("id");//EL 에 있음
-
-	String keyword = request.getParameter("keyword");//EL 로 처리가능
-	
-	boolean isSearch = keyword!=null&&!keyword.trim().equals("");
-	
-	//////////////////////////페이지네이션/////////////////////////
-	
-	int pageNo;
-	
-	try{
-		pageNo =Integer.parseInt(request.getParameter("pageNo"));
-		if(pageNo<1){
-			throw new Exception();
-		}
-		
-		
-	}catch(Exception e){
-		pageNo = 1;//기본 페이지
-	}
-	
-	int pageSize;
-	try{
-		pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		if(pageSize < 10){
-			throw new Exception();
-		}
-	}
-	catch(Exception e){
-		pageSize = 5;//페이지당 게시글 수 설정
-	}
-	//rownum의 시작번호와 종료번호를 계산
-	int startRow = pageNo * pageSize - (pageSize-1);
-	int endRow = pageNo * pageSize;
-	///////////////////////////페이지네이션///////////////////////////
-	
-	
-	approvalDao approvaldao = new approvalDao();
-	List<approvalDto> list ;
-
-	if(isSearch){//검색 시 기안서 리스트 출력
-		list = approvaldao.approvalSearch(id, keyword, startRow, endRow);
-		
-	}
-	else{//일반 기안서 출력
-		list = approvaldao.approvalList(id, startRow, endRow);
-	}
-	/////////////////////////////////////////////////////////////////////
-	// 페이지 네비게이션 영역 계산
-	/////////////////////////////////////////////////////////////////////
-	// = 하단에 표시되는 숫자 링크의 범위를 페이지번호를 기준으로 계산하여 설정
-	// = 하단 네비게이션 숫자는 startBlock 부터 endBlock 까지 출력
-	// = (주의사항) 게시글 개수를 구해서 마지막 블록 번호를 넘어가지 않도록 처리
-	int count;
-	if(isSearch){
-	
-	count = approvaldao.getCount(id, keyword);
-	}
-	else{
-	count = approvaldao.getCount(id);
-	}
-	int blockSize = 10;
-	int lastBlock = (count + pageSize - 1) / pageSize;
-	//int lastBlock = (count - 1) / pageSize + 1;
-	int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
-	int endBlock = startBlock + blockSize - 1;
-	
-	if(endBlock > lastBlock){//범위를 벗어나면
-	endBlock = lastBlock;//범위를 수정
-	
-	}*/
-%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/section.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-<!-- 
-
-if Search 자리
-
- -->
 
 <script>
 	//페이지 네비게이션에 있는 a태그를 누르면 전송하는 것이 아니라 form 내부에 값을 설정한 뒤 form을 전송
@@ -177,10 +98,30 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 		</c:forEach>
 		</tbody>
 </table>
-
+<input type="button" class = "appinsert link-btn" value="기안서 작성">
 </div>
 
-
+<div class="row">
+		<!-- 페이지 네비게이션 자리 -->
+		<div class="pagination">
+			<c:if test="${startBlock>1}">
+			<a class="move-link">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${startBlock}" end="${endBlock}" step="1">
+			<c:choose>
+			<c:when test="${i==pageNo}">		
+					<a class="on">${i}</a>
+					</c:when>
+			<c:otherwise>		
+					<a>${i}</a>
+				</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			<c:if test="${endBlock<lastBlock}">
+			<a class="move-link">다음</a>
+			</c:if>
+		</div>	
+	</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
