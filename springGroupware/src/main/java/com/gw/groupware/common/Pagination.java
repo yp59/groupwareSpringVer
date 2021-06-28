@@ -1,5 +1,14 @@
 package com.gw.groupware.common;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Pagination {
 	
 	
@@ -13,115 +22,6 @@ public class Pagination {
 	private int startBlock;
 	private int endBlock;
 	
-	
-	
-	public int getPageNo() {
-		return pageNo;
-	}
-
-
-
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-
-
-	public int getCount() {
-		return count;
-	}
-
-
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-
-
-	public int getStartRow() {
-		return startRow;
-	}
-
-
-
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
-
-
-
-	public int getEndRow() {
-		return endRow;
-	}
-
-
-
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
-
-
-
-	public int getBlockSize() {
-		return blockSize;
-	}
-
-
-
-	public void setBlockSize(int blockSize) {
-		this.blockSize = blockSize;
-	}
-
-
-
-	public int getLastBlock() {
-		return lastBlock;
-	}
-
-
-
-	public void setLastBlock(int lastBlock) {
-		this.lastBlock = lastBlock;
-	}
-
-
-
-	public int getStartBlock() {
-		return startBlock;
-	}
-
-
-
-	public void setStartBlock(int startBlock) {
-		this.startBlock = startBlock;
-	}
-
-
-
-	public int getEndBlock() {
-		return endBlock;
-	}
-
-
-
-	public void setEndBlock(int endBlock) {
-		this.endBlock = endBlock;
-	}
-
-
 
 	public void pageInfo(int pageNo,int pageSize,int count) {
 
