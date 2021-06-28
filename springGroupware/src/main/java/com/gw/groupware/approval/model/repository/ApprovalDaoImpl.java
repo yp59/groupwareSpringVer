@@ -50,7 +50,7 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	@Override
 	public int insertListCount(String empNo) {
 		
-		return sqlSession.selectOne(empNo);
+		return sqlSession.selectOne("approval.insertListCount",empNo);
 	}
 
 }

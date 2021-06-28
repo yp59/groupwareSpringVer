@@ -27,7 +27,7 @@ public class Pagination {
 
 	//받아와야 하는 값	
 		this.pageNo = pageNo;
-	/*
+	
 		try{
 				
 			if(pageNo<1){
@@ -40,10 +40,10 @@ public class Pagination {
 			pageNo = 1;//기본 페이지
 		}
 		
-	*/	
+	
 		this.pageSize = pageSize;
 		
-		/*
+		
 		try{
 			
 			if(pageSize < 10){
@@ -53,7 +53,7 @@ public class Pagination {
 		catch(Exception e){
 			pageSize = 5;//페이지당 게시글 수 설정
 		}
-	*/	
+		
 		//rownum의 시작번호와 종료번호를 계산
 		this.startRow = pageNo * pageSize - (pageSize-1);
 		this.endRow = pageNo * pageSize;

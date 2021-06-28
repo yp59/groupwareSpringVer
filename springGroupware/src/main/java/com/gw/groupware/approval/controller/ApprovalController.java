@@ -42,7 +42,7 @@ public class ApprovalController {
 		
 	String empNo =(String)session.getAttribute("empNo");
 	
-	int insertListCount = 11;//approvalService.insertListCount(empNo);
+	int insertListCount = approvalService.insertListCount(empNo);
 
 		Pagination pagination = new Pagination();
 
