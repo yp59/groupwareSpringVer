@@ -9,5 +9,5 @@ import com.gw.groupware.approval.model.entity.ApprovalVo;
 public interface ApprovalDao {
 
 	List<ApprovalVo> approvalList(String empNo);
-	
+	List<ApprovalVo> approvaSearch(String empNo, String keyword);
 }

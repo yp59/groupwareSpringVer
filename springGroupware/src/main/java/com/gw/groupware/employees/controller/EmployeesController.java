@@ -42,8 +42,9 @@ public class EmployeesController {
 	 
 	}
 	
-	@RequestMapping("/logOut")
+	@GetMapping("/logOut")
 	public String logOut(HttpSession session) {
+		session.removeAttribute("empNo");
 		session.removeAttribute("employeesDto");
 		
 		return "redirect:/";

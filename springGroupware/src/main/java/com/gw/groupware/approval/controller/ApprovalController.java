@@ -8,30 +8,38 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gw.groupware.approval.model.entity.ApprovalVo;
 import com.gw.groupware.approval.model.repository.ApprovalDao;
+import com.gw.groupware.approval.model.service.ApprovalService;
 
 @Controller
 @RequestMapping("/approval")
 public class ApprovalController {
 
 	@Autowired
-	private ApprovalDao approvalDao;
+	private ApprovalService approvalService;
 	
-	@RequestMapping("/aprrovalInsertMain")
-	public String approvalInsertMain(HttpSession session,
-									 Model model) {
-	
+	@GetMapping("/approvalInsertMain")
+	public String approvalInsertMain( HttpSession session, Model model) {
+		
 	String empNo =(String)session.getAttribute("empNo");	
-	List<ApprovalVo> list = new ArrayList<>();
-	
-	list=approvalDao.approvalList(empNo);//session을 넣는게 아니라 여기서 session값을 뽑고 넘겨주는것?
-	model.addAttribute("applist", list);
+	model.addAttribute("applist", approvalService.approvalList(empNo));
 	return "approval/approvalInsertMain";
 	}
 	
+	@PostMapping("/approvalInsertMain")
+	public String approvalInsertSearch(@RequestParam(value="keyword") String keyword, 
+									HttpSession session,Model model) {
+		
+	String empNo =(String)session.getAttribute("empNo");	
+	model.addAttribute("applist", approvalService.approvalSearch(empNo,keyword));
+
+	return "approval/approvalInsertMain";
+	}
 }

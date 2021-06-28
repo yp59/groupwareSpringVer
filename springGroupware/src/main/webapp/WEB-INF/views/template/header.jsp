@@ -66,7 +66,7 @@ text-decoration: none;
 				
 			<c:if test="${isLogin}">
 				<div class="loginSub">${employeesDto.empName}님 환영합니다.
-				<a class="logout" href="${root}/logOut">로그아웃</a>
+				<a class="logout" href="${root}/employees/logOut">로그아웃</a>
 				
 			</div>
 			</c:if>
@@ -96,7 +96,7 @@ text-decoration: none;
 
 
 
-						<li><a href="${root}/approval/aprrovalInsertMain">기안서 작성</a></li>
+						<li><a href="${root}/approval/approvalInsertMain">기안서 작성</a></li>
 						<li><a href="#">내 결재 관리</a></li>
 
 					</ul>

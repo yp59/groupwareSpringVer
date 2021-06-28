@@ -31,5 +31,5 @@ public class ApprovalVo {
 	private int poNo;
 	private String indirType;
 	private String approval;
-	private List<ApprovalVo> list;
+	private List<ApprovalVo> list;//list를 뽑으려면 Vo로 넣어줘야한다?? 생성자필요?????
 }

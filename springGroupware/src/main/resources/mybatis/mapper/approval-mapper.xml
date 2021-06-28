@@ -25,12 +25,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		2. 동적 바인딩 : 데이터를 형태에 맞게 해석하여 따옴표 등을 처리한 뒤 구문에 할당(데이터)
 			사용법 : #{데이터}
 	 -->
-<select id="list" resultType = "ApprovalVo" parameterType="String"><!-- 띄어쓰기 조심 -->
+<select id="insertList" resultType = "ApprovalVo" parameterType="String"><!-- 띄어쓰기 조심 페이지네이션 미적용 -->
 select A.*,E.emp_name from approval A inner join 
  employees E on E.emp_no = A.drafter 
  where A.drafter = #{empNo} 
  order by app_date_start desc
  </select>
-
+ 
+ 
+ <select id="listPagenation" resultType = "ApprovalVo" parameterType="String">
+ select * from (
+			 select rownum rn, A.*, E.emp_name
+			 from approval A
+			 inner join employees E on
+			 A.drafter = E.emp_no
+			 where A.drafter = #{empNo}
+			 order by app_no desc)
+			 where rn between #{startList} and #{listSize}
+ </select>
+ 
+ <select id=""></select>
+ 
+ 
+<select id="insertSearch" resultType="ApprovalVo" parameterType="ApprovalVo">
+select * from (
+			select rownum rn, A.*, E.emp_name
+			from approval A
+			inner join employees E on
+			A.drafter = E.emp_no
+			where A.drafter = #{drafter} and instr(app_title,#{appTitle})>0)
+</select>
 	
 </mapper>

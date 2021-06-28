@@ -3,7 +3,9 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="f" uri = "http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="f" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="isSearch" value="${not empty param.keyword}"></c:set>
+  
 <%/*
 	String id = (String) session.getAttribute("id");//EL 에 있음
 
@@ -141,8 +143,8 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 <h2>기안서 작성</h2>
 </div>
 
-<form class = "search-form" action="approvalInsertMain.jsp">
-<input type="hidden" name="pageNo">
+<form class = "search-form" action="approvalInsertMain" method="post">
+<!-- <input type="hidden" name="pageNo"> -->
 
 <div class = "text-right">
 <input type="text" name="keyword" placeholder="기안서 검색"><!-- 검색 keyword 입력창-->
