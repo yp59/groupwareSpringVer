@@ -33,22 +33,21 @@ select A.*,E.emp_name from approval A inner join
  </select>
  
  
- <select id="insertListPagenation" resultType = "ApprovalVo" parameterType="map"><!--기안서 작성 페이지네이션 적용시 sql문(검색x) -->
+ <select id="insertListPagination" resultType = "ApprovalVo" parameterType="map"><!--기안서 작성 페이지네이션 적용시 sql문(검색x) -->
  select * from (
 			 select rownum rn, A.*, E.emp_name
 			 from approval A
 			 inner join employees E on
 			 A.drafter = E.emp_no
-			 where A.drafter = #{empNo}
+			 where A.drafter = #{drafter}
 			 order by app_no desc)
 			 where rn between #{startRow} and #{endRow}
  </select>
  
  <select id="insertListCount" resultType="int" parameterType="String"><!-- 기안서 작성한 총 수 -->
- select count(*) insertListCount from approval where drafter = #{empNo}
+ select count(*) from approval where drafter = #{empNo}
  </select>
- 
- 
+
 <select id="insertSearch" resultType="ApprovalVo" parameterType="ApprovalVo"><!-- 띄어쓰기 조심 페이지네이션 미적용 (검색ㅇ)-->
 select * from (
 			select rownum rn, A.*, E.emp_name

@@ -25,7 +25,7 @@ public class ApprovalController {
 
 	@Autowired
 	private ApprovalService approvalService;
-	/* 페이지네이션 미적용
+/*	
 	@GetMapping("/approvalInsertMain")
 	public String approvalInsertMain(HttpSession session, Model model) {
 	String empNo =(String)session.getAttribute("empNo");
@@ -33,15 +33,16 @@ public class ApprovalController {
 	model.addAttribute("applist", approvalService.insertList(empNo));
 	return "approval/approvalInsertMain";
 	}
+	
 	*/
 	@GetMapping("/approvalInsertMain")
 	public String approvalInsertMain(@RequestParam(required = false, defaultValue = "1") int pageNo,
-									 @RequestParam(required = false, defaultValue = "1") int pageSize,
+									 @RequestParam(required = false, defaultValue = "5") int pageSize,
 									 HttpSession session, Model model) {
 		
 	String empNo =(String)session.getAttribute("empNo");
 	
-	int insertListCount = approvalService.insertListCount(empNo);
+	int insertListCount = 11;//approvalService.insertListCount(empNo);
 
 		Pagination pagination = new Pagination();
 

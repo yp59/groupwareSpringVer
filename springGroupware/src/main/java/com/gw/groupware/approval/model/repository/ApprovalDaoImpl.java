@@ -40,11 +40,11 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	public List<ApprovalVo> insertListPagination(String empNo, Pagination pagination) {
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("empNo", empNo);
-		map.put("startRow", pagination.getStartRow());
+		map.put("drafter",empNo);
+		map.put("startRow",pagination.getStartRow());
 		map.put("endRow", pagination.getEndRow());
 		
-		return sqlSession.selectList("apprval.insertListPagination", map);
+		return sqlSession.selectList("approval.insertListPagination",map);
 	}
 
 	@Override

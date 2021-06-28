@@ -1,10 +1,5 @@
 package com.gw.groupware.common;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-
-@Data
 public class Pagination {
 	
 	
@@ -18,22 +13,139 @@ public class Pagination {
 	private int startBlock;
 	private int endBlock;
 	
+	
+	
+	public int getPageNo() {
+		return pageNo;
+	}
+
+
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
+
+
+	public int getBlockSize() {
+		return blockSize;
+	}
+
+
+
+	public void setBlockSize(int blockSize) {
+		this.blockSize = blockSize;
+	}
+
+
+
+	public int getLastBlock() {
+		return lastBlock;
+	}
+
+
+
+	public void setLastBlock(int lastBlock) {
+		this.lastBlock = lastBlock;
+	}
+
+
+
+	public int getStartBlock() {
+		return startBlock;
+	}
+
+
+
+	public void setStartBlock(int startBlock) {
+		this.startBlock = startBlock;
+	}
+
+
+
+	public int getEndBlock() {
+		return endBlock;
+	}
+
+
+
+	public void setEndBlock(int endBlock) {
+		this.endBlock = endBlock;
+	}
+
+
+
 	public void pageInfo(int pageNo,int pageSize,int count) {
 
 	//받아와야 하는 값	
-		
+		this.pageNo = pageNo;
+	/*
 		try{
-			this.pageNo = pageNo;	
+				
 			if(pageNo<1){
 				throw new Exception();
 			}
 			
 		}catch(Exception e){
+		
+		
 			pageNo = 1;//기본 페이지
 		}
 		
+	*/	
+		this.pageSize = pageSize;
+		
+		/*
 		try{
-			this.pageSize = pageSize;
+			
 			if(pageSize < 10){
 				throw new Exception();
 			}
@@ -41,7 +153,7 @@ public class Pagination {
 		catch(Exception e){
 			pageSize = 5;//페이지당 게시글 수 설정
 		}
-		
+	*/	
 		//rownum의 시작번호와 종료번호를 계산
 		this.startRow = pageNo * pageSize - (pageSize-1);
 		this.endRow = pageNo * pageSize;

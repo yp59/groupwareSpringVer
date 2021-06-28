@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApprovalVo {
 
-	private int rowNum;
+	private int rn;
 	private int appNo;
 	private String drafter;
 	private String appTitle;

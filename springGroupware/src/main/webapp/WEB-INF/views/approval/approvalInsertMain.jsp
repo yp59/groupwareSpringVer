@@ -104,12 +104,12 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 <div class="row">
 		<!-- 페이지 네비게이션 자리 -->
 		<div class="pagination">
-			<c:if test="${startBlock>1}">
+			<c:if test="${pagination.startBlock>1}">
 			<a class="move-link">이전</a>
 			</c:if>
-			<c:forEach var="i" begin="${startBlock}" end="${endBlock}" step="1">
+			<c:forEach var="i" begin="${pagination.startBlock}" end="${pagination.endBlock}" step="1">
 			<c:choose>
-			<c:when test="${i==pageNo}">		
+			<c:when test="${i==pagination.pageNo}">		
 					<a class="on">${i}</a>
 					</c:when>
 			<c:otherwise>		
@@ -117,7 +117,7 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
-			<c:if test="${endBlock<lastBlock}">
+			<c:if test="${pagination.endBlock<pagination.lastBlock}">
 			<a class="move-link">다음</a>
 			</c:if>
 		</div>	
