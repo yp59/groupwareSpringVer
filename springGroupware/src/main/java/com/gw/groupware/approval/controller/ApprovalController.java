@@ -29,7 +29,7 @@ public class ApprovalController {
 	public String approvalInsertMain( HttpSession session, Model model) {
 		
 	String empNo =(String)session.getAttribute("empNo");	
-	model.addAttribute("applist", approvalService.approvalList(empNo));
+	model.addAttribute("applist", approvalService.insertList(empNo));
 	return "approval/approvalInsertMain";
 	}
 	
@@ -38,7 +38,7 @@ public class ApprovalController {
 									HttpSession session,Model model) {
 		
 	String empNo =(String)session.getAttribute("empNo");	
-	model.addAttribute("applist", approvalService.approvalSearch(empNo,keyword));
+	model.addAttribute("applist", approvalService.insertSearch(empNo,keyword));
 
 	return "approval/approvalInsertMain";
 	}

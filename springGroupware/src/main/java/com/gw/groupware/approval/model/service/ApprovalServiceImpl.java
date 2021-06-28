@@ -15,15 +15,15 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	
 	@Override
-	public List<ApprovalVo> approvalList(String empNo) {
+	public List<ApprovalVo> insertList(String empNo) {
 		
-		return approvalDao.approvalList(empNo);
+		return approvalDao.insertList(empNo);
 	}
 
 	@Override
-	public List<ApprovalVo> approvalSearch(String empNo, String keyword) {
+	public List<ApprovalVo> insertSearch(String empNo, String keyword) {
 		
-		return approvalDao.approvaSearch(empNo, keyword);
+		return approvalDao.insertSearch(empNo, keyword);
 	}
 
 }

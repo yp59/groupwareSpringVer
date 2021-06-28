@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		2. 동적 바인딩 : 데이터를 형태에 맞게 해석하여 따옴표 등을 처리한 뒤 구문에 할당(데이터)
 			사용법 : #{데이터}
 	 -->
-<select id="insertList" resultType = "ApprovalVo" parameterType="String"><!-- 띄어쓰기 조심 페이지네이션 미적용 -->
+<select id="insertList" resultType = "ApprovalVo" parameterType="String"><!-- 띄어쓰기 조심 페이지네이션 미적용 (검색x)-->
 select A.*,E.emp_name from approval A inner join 
  employees E on E.emp_no = A.drafter 
  where A.drafter = #{empNo} 
@@ -33,7 +33,7 @@ select A.*,E.emp_name from approval A inner join
  </select>
  
  
- <select id="listPagenation" resultType = "ApprovalVo" parameterType="String">
+ <select id="insertListPagenation" resultType = "ApprovalVo" parameterType="String"><!--기안서 작성 페이지네이션 적용시 sql문(검색x) -->
  select * from (
 			 select rownum rn, A.*, E.emp_name
 			 from approval A
@@ -44,10 +44,12 @@ select A.*,E.emp_name from approval A inner join
 			 where rn between #{startList} and #{listSize}
  </select>
  
- <select id=""></select>
+ <select id="insertListCount" resultType="int" parameterType="String"><!-- 기안서 작성한 총 수 -->
+ select count(*) listCnt from approval where drafter = #{empNo}
+ </select>
  
  
-<select id="insertSearch" resultType="ApprovalVo" parameterType="ApprovalVo">
+<select id="insertSearch" resultType="ApprovalVo" parameterType="ApprovalVo"><!-- 띄어쓰기 조심 페이지네이션 미적용 (검색ㅇ)-->
 select * from (
 			select rownum rn, A.*, E.emp_name
 			from approval A

@@ -18,12 +18,12 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ApprovalVo> approvalList(String empNo) {
+	public List<ApprovalVo> insertList(String empNo) {
 	return sqlSession.selectList("approval.insertList",empNo);
 	}
 
 	@Override
-	public List<ApprovalVo> approvaSearch(String empNo, String keyword) {//mybatis에 넣어주기 위해서 builder로 넣음
+	public List<ApprovalVo> insertSearch(String empNo, String keyword) {//mybatis에 넣어주기 위해서 builder로 넣음
 		
 		ApprovalVo approvalVo = ApprovalVo.builder()
 								.drafter(empNo)
