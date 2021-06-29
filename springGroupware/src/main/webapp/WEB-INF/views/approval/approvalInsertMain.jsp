@@ -21,18 +21,18 @@
 				pageNo = parseInt($(".pagination > a:not(.move-link)").first().text()) - 1;
 				$("input[name=pageNo]").val(pageNo);
 				$(".search-form").submit();//강제 submit 발생
-				$(".page-form").submit();
+				//$(".page-form").submit();
 			}	
 			else if(pageNo == "다음"){//다음 링크 : 현재 링크 중 마지막 항목 값 + 1
 				pageNo = parseInt($(".pagination > a:not(.move-link)").last().text()) + 1;
 				$("input[name=pageNo]").val(pageNo);
 				$(".search-form").submit();//강제 submit 발생
-				$(".page-form").submit();
+				//$(".page-form").submit();
 			}
 			else{//숫자 링크
 				$("input[name=pageNo]").val(pageNo);
 				$(".search-form").submit();//강제 submit 발생
-				$(".page-form").submit();
+				//$(".page-form").submit();
 			}
 		});
 	});
@@ -67,11 +67,8 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 <h2>기안서 작성</h2>
 </div>
 
-<form class = "page-form" action="approvalInsertMain"><!-- 검색 안했을 때 페이지네이션 정보 -->
-<input type="hidden" name="pageNo">
-</form>
 
-<form class = "search-form" action="approvalInsertMain" method="post">
+<form class = "search-form" action="approvalInsertMain">
 <input type="hidden" name="pageNo">
 <div class = "text-right">
 <input type="text" name="keyword" placeholder="기안서 검색"><!-- 검색 keyword 입력창-->
