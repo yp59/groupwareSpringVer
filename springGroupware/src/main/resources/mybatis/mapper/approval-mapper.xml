@@ -11,20 +11,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	- namespace : 여러 개의 매퍼 중에 현재 매퍼를 식별하도록 지어주는 고유한 명칭(필수)
  -->
 <mapper namespace="approval"><!-- mapper에 Dto가 있으면 만들어줘야 화ㅏ면 나옴 안하면 오류난다.-->
-	
-	<!-- 
-		구문 생성 : 종류에 맞는 구문을 해당 태그로 작성
-		- id : 외부에서 구문을 실행하기 위해 알아야 할 구문의 고유 식별값 
-		- parameterType : 외부에서 전달되는 데이터의 타입
-		- resultType : 조회 결과 형태(오로지 select에서만 사용가능)
-			- 목록이나 단일항목 모두 DTO로 취급한다
-			
-		mybatis에는 2종류의 바인딩이 존재
-		1. 정적 바인딩 : 있는 그대로의 데이터를 추가적인 처리 없이 구문에 할당(항목)	
-			사용법 : ${데이터}
-		2. 동적 바인딩 : 데이터를 형태에 맞게 해석하여 따옴표 등을 처리한 뒤 구문에 할당(데이터)
-			사용법 : #{데이터}
-	 -->
 
  <select id="insertListPagination" resultType = "ApprovalVo" parameterType="map"><!--기안서 작성 페이지네이션 적용시 sql문(검색x) -->
  select * from (
@@ -40,16 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="insertListCount" resultType="int" parameterType="String"><!-- 기안서 작성한 총 수 -->
  select count(*) from approval where drafter = #{empNo}
  </select>
-
-<select id="insertSearch" resultType="ApprovalVo" parameterType="ApprovalVo"><!-- 띄어쓰기 조심 페이지네이션 미적용 (검색ㅇ)-->
-select * from (
-			select rownum rn, A.*, E.emp_name
-			from approval A
-			inner join employees E on
-			A.drafter = E.emp_no
-			where A.drafter = #{drafter} and instr(app_title,#{appTitle})>0)
-</select>
-
 
 <select id="insertSearchPagination" resultType="ApprovalVo" parameterType="map"><!-- 띄어쓰기 조심 페이지네이션 적용 (검색ㅇ)-->
 select * from (

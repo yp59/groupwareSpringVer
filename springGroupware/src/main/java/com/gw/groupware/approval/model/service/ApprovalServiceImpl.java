@@ -13,14 +13,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	@Autowired
 	private ApprovalDao approvalDao;
-	
-	
-
-	@Override
-	public List<ApprovalVo> insertSearch(String empNo, String keyword) {
-		
-		return approvalDao.insertSearch(empNo, keyword);
-	}
 
 	@Override
 	public List<ApprovalVo> insertListPagination(String empNo, Pagination pagination) {

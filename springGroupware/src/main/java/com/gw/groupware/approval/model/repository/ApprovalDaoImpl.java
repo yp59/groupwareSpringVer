@@ -19,18 +19,6 @@ public class ApprovalDaoImpl implements ApprovalDao{
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-
-	@Override
-	public List<ApprovalVo> insertSearch(String empNo, String keyword) {//mybatis에 넣어주기 위해서 builder로 넣음
-		
-		ApprovalVo approvalVo = ApprovalVo.builder()
-								.drafter(empNo)
-								.appTitle(keyword)
-								.build();
-		
-		return sqlSession.selectList("approval.insertSearch", approvalVo);
-	}
 
 	@Override
 	public List<ApprovalVo> insertListPagination(String empNo, Pagination pagination) {

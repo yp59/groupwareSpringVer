@@ -53,7 +53,7 @@ $(function(){
 var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +
 			', scrollbars = no';
 	$(".appinsert").click(function(){
-		 window.open("approvalInsert.jsp","draftPopUp",option);
+		 window.open("approvalInsert","draftPopUp",option);
 		 
 	});
 ///////////////////////////////////////////////////////////////////////////////

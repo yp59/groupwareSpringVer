@@ -56,38 +56,18 @@ public class ApprovalController {
 	
 	return "approval/approvalInsertMain";
 	}
-	/*
-	@PostMapping("/approvalInsertMain")
-	public String approvalInsertSearch(
-									
-									 @RequestParam(value="keyword") String keyword, 
-									HttpSession session,Model model) {
-		
-	String empNo =(String)session.getAttribute("empNo");	
 	
-	model.addAttribute("applist", approvalService.insertSearch(empNo,keyword));
-
-	return "approval/approvalInsertMain";
-	}*/
-	/*
-	@PostMapping("/approvalInsertMain")//기안서 검색 페이지네이션 controller
-	public String approvalInsertSearch(
-									 @RequestParam(required = false, defaultValue = "1") int pageNo,
-									 @RequestParam(required = false, defaultValue = "5") int pageSize,
-									 @RequestParam String keyword, 
-									HttpSession session,Model model) {
-		
-	String empNo =(String)session.getAttribute("empNo");	
-	int insertSearchCount = approvalService.insertSearchCount(empNo,keyword);
-		
-		Pagination pagination = new Pagination();
 	
-		pagination.pageInfo(pageNo, pageSize, insertSearchCount);	
+	@GetMapping("/approvalInsert")
+	public String approvalInsert() {
 		
-	model.addAttribute("pagination", pagination);	
-	model.addAttribute("applist", approvalService.insertSearchPagination(empNo,pagination,keyword));
-
-	return "approval/approvalInsertMain";
+		return "approval/approvalInsert";
 	}
-	*/
+	
+	
+	@GetMapping("/InsertDepartmentPopUp")
+	public String InsertDepartmentPopUp() {
+		
+		return "approval/InsertDepartmentPopUp";
+	}
 }
