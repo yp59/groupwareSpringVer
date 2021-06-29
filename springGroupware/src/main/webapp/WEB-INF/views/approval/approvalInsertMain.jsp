@@ -64,8 +64,8 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 <h2>기안서 작성</h2>
 </div>
 
-<form class = "search-form" action="approvalInsertMain" method="post">
-<!-- <input type="hidden" name="pageNo"> -->
+<form class = "search-form" action="approvalInsertMain"><!-- 검색 method post로 했었음 여기 주의!!!!!!!!!!!!!! -->
+<input type="hidden" name="pageNo">
 
 <div class = "text-right">
 <input type="text" name="keyword" placeholder="기안서 검색"><!-- 검색 keyword 입력창-->
@@ -120,6 +120,10 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 			<c:if test="${pagination.endBlock<pagination.lastBlock}">
 			<a class="move-link">다음</a>
 			</c:if>
+			<div>${pagination.startBlock}</div>
+			<div>${pagination.endBlock}</div>
+			<div>${pagination.pageNo}</div>
+			<div>${pagination.pageSize}</div>
 		</div>	
 	</div>
 
