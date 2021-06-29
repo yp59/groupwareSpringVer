@@ -20,10 +20,6 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
-	public List<ApprovalVo> insertList(String empNo) {
-	return sqlSession.selectList("approval.insertList",empNo);
-	}
 
 	@Override
 	public List<ApprovalVo> insertSearch(String empNo, String keyword) {//mybatis에 넣어주기 위해서 builder로 넣음
@@ -51,6 +47,28 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	public int insertListCount(String empNo) {
 		
 		return sqlSession.selectOne("approval.insertListCount",empNo);
+	}
+
+	@Override
+	public List<ApprovalVo> insertSearchPagination(String empNo, Pagination pagination, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("drafter", empNo);
+		map.put("startRow", pagination.getStartRow());
+		map.put("endRow", pagination.getEndRow());
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList("approval.insertSearchPagination", map);
+	}
+
+	@Override
+	public int insertSearchCount(String empNo, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("drafter", empNo);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("approval.insertSearchCount", keyword);
 	}
 
 }

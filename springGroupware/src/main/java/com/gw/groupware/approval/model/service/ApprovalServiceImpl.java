@@ -15,11 +15,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 	private ApprovalDao approvalDao;
 	
 	
-	@Override
-	public List<ApprovalVo> insertList(String empNo) {
-		
-		return approvalDao.insertList(empNo);
-	}
 
 	@Override
 	public List<ApprovalVo> insertSearch(String empNo, String keyword) {
@@ -37,6 +32,18 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public int insertListCount(String empNo) {
 		
 		return approvalDao.insertListCount(empNo);
+	}
+
+	@Override
+	public List<ApprovalVo> insertSearchPagination(String empNo, Pagination pagination, String keyword) {
+		
+		return approvalDao.insertSearchPagination(empNo, pagination, keyword);
+	}
+
+	@Override
+	public int insertSearchCount(String empNo, String keyword) {
+		
+		return approvalDao.insertSearchCount(empNo, keyword);
 	}
 
 }

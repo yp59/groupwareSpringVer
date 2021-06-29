@@ -25,23 +25,13 @@ public class ApprovalController {
 
 	@Autowired
 	private ApprovalService approvalService;
-/*	
-	@GetMapping("/approvalInsertMain")
-	public String approvalInsertMain(HttpSession session, Model model) {
-	String empNo =(String)session.getAttribute("empNo");
-	
-	model.addAttribute("applist", approvalService.insertList(empNo));
-	return "approval/approvalInsertMain";
-	}
-	
-	*/
-	@GetMapping("/approvalInsertMain")
+
+	@GetMapping("/approvalInsertMain")//페이지네이션 적용한 기안서 작성 메인 페이지 
 	public String approvalInsertMain(@RequestParam(required = false, defaultValue = "1") int pageNo,
 									 @RequestParam(required = false, defaultValue = "5") int pageSize,
 									 HttpSession session, Model model) {
 		
 	String empNo =(String)session.getAttribute("empNo");
-	
 	int insertListCount = approvalService.insertListCount(empNo);
 
 		Pagination pagination = new Pagination();
@@ -52,13 +42,38 @@ public class ApprovalController {
 	model.addAttribute("applist", approvalService.insertListPagination(empNo, pagination));
 	return "approval/approvalInsertMain";
 	}
+	/*
 	@PostMapping("/approvalInsertMain")
-	public String approvalInsertSearch(@RequestParam(value="keyword") String keyword, 
+	public String approvalInsertSearch(
+									
+									 @RequestParam(value="keyword") String keyword, 
 									HttpSession session,Model model) {
 		
 	String empNo =(String)session.getAttribute("empNo");	
+	
 	model.addAttribute("applist", approvalService.insertSearch(empNo,keyword));
 
 	return "approval/approvalInsertMain";
+	}*/
+	
+	@PostMapping("/approvalInsertMain")//기안서 검색 페이지네이션 controller
+	public String approvalInsertSearch(
+									 @RequestParam(required = false, defaultValue = "1") int pageNo,
+									 @RequestParam(required = false, defaultValue = "5") int pageSize,
+									 @RequestParam(value="keyword") String keyword, 
+									HttpSession session,Model model) {
+		
+	String empNo =(String)session.getAttribute("empNo");	
+	int insertListCount = approvalService.insertListCount(empNo);
+		
+		Pagination pagination = new Pagination();
+	
+		pagination.pageInfo(pageNo, pageSize, insertListCount);	
+		
+	model.addAttribute("pagination", pagination);	
+	model.addAttribute("applist", approvalService.insertSearchPagination(empNo,pagination,keyword));
+
+	return "approval/approvalInsertMain";
 	}
+	
 }
