@@ -40,5 +40,13 @@ select * from (
 <select id="insertSearchCount" resultType="int" parameterType="map"><!-- 검색한 기안서 중 작성한 총 수 -->
  select count(*) from approval where instr(app_title,#{keyword})>0 and drafter =  #{drafter} 
 </select>
-	
+
+<insert id="appInsert" parameterType="approvalDto">
+insert into approval values(app_seq.nextval,#{drafter},#{appTitle},#{appContent},#{appDateStart},#{appDateEnd},'상신')
+</insert>
+
+<select id="pkKey" resultType="int" parameterType="String">
+select max(app_no) from
+			approval where drafter= #{drafter}
+</select>	
 </mapper>

@@ -11,6 +11,11 @@
 <c:set var="referrerGroup" value="${param.reffer}"></c:set>
 <c:set var="implementerGroup" value="${param.implementer}"></c:set>
 
+<c:if test="${approvalGroup==null}"><c:set var ="approvalGroup" value=""></c:set></c:if>
+<c:if test="${consesusGroup==null}"><c:set var ="consesusGroup" value=""></c:set></c:if>
+<c:if test="${referrerGroup==null}"><c:set var ="referrerGroup" value=""></c:set></c:if>
+<c:if test="${implementerGroup==null}"><c:set var ="implementerGroup" value=""></c:set></c:if>
+
 <%/*String id = (String) session.getAttribute("id");
 
 String app = request.getParameter("approval");//부서리스트에서 얻은 데이터값을 파라미터로 저장한다.
@@ -84,7 +89,7 @@ $(function(){//window.load와 같은의미
 			<div>
 					결재자 <input type = "text" class="appPeople design" name = "approvalGroup" value="${approvalGroup}"><br><!-- approvalNo로 이름 지었는데 Vo통일성을 위해서 No지움 -->
 					합의자 <input type = "text" class="appPeople design" name = "consesusGroup" value="${consesusGroup}"><br> 
-					참조자 <input type = "text" class="appPeople design" name = "refferGroup" value="${referrerGroup}"><br>
+					참조자 <input type = "text" class="appPeople design" name = "referrerGroup" value="${referrerGroup}"><br>
 					시행자 <input type = "text" class="appPeople design" name = "implementerGroup" value="${implementerGroup}"><br><br>
 			
 			</div>

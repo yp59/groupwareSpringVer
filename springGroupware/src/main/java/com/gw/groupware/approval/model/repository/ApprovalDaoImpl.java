@@ -10,7 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gw.groupware.approval.model.entity.ApprovalDto;
 import com.gw.groupware.approval.model.entity.ApprovalVo;
+import com.gw.groupware.approval.model.entity.DirectappDto;
+import com.gw.groupware.approval.model.entity.IndirectappDto;
 import com.gw.groupware.common.Pagination;
 import com.gw.groupware.employees.model.entity.EmployeesDto;
 
@@ -57,6 +60,30 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectOne("approval.insertSearchCount", keyword);
+	}
+
+	@Override
+	public void approvalInsert(ApprovalDto approvalDto) {
+	
+		sqlSession.insert("approval.appInsert", approvalDto);
+	}
+
+	@Override
+	public int pkKeyValue(String drafter) {
+		
+		return sqlSession.selectOne("approval.pkKey",drafter);
+	}
+
+	@Override
+	public void directInsert(DirectappDto directappdto) {
+		sqlSession.insert("directapp.dirInsert", directappdto);
+		
+	}
+
+	@Override
+	public void indirectInsert(IndirectappDto indirectappdto) {
+		sqlSession.insert("indirectapp.indirInsert", indirectappdto);
+		
 	}
 
 }

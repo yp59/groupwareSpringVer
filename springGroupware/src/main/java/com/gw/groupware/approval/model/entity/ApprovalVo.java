@@ -2,6 +2,8 @@ package com.gw.groupware.approval.model.entity;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,7 +49,6 @@ public class ApprovalVo {
 	////////???????/////////일단 남겨둠
 	//private String approval;
 	//private String consesus;
-	
 	
 	private List<ApprovalVo> list;//list를 뽑으려면 Vo로 넣어줘야한다
 }
