@@ -19,7 +19,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	@Override
 	public List<ApprovalVo> insertListPagination(String empNo, Pagination pagination) {
-		// TODO Auto-generated method stub
+	
 		return approvalDao.insertListPagination(empNo, pagination);
 	}
 
@@ -64,6 +64,30 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public void indirectInsert(IndirectappDto indirectappdto) {
 	approvalDao.indirectInsert(indirectappdto);
 		
+	}
+
+	@Override
+	public List<ApprovalVo> listPagination(String empNo, Pagination pagination) {
+		
+		return approvalDao.listPagination(empNo, pagination);
+	}
+
+	@Override
+	public int listCount(String empNo) {
+		
+		return approvalDao.listCount(empNo);
+	}
+
+	@Override
+	public List<ApprovalVo> listSearchPagination(String empNo, Pagination pagination, String keyword) {
+	
+		return approvalDao.listSearchPagination(empNo, pagination, keyword);
+	}
+
+	@Override
+	public int listSearchCount(String empNo, String keyword) {
+	
+		return approvalDao.listSearchCount(empNo, keyword);
 	}
 
 }

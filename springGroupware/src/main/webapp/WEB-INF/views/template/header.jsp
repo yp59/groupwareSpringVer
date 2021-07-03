@@ -91,13 +91,13 @@ text-decoration: none;
 					</ul>
 				</li>
 				<li>
-					<a href="#">전자 결재</a>
+					<a href="${root}/approval/approvalList">전자 결재</a>
 					<ul>
 
 
 
 						<li><a href="${root}/approval/approvalInsertMain">기안서 작성</a></li>
-						<li><a href="#">내 결재 관리</a></li>
+						<li><a href="${root}/approval/approvalList">내 결재 관리</a></li>
 
 					</ul>
 				</li>

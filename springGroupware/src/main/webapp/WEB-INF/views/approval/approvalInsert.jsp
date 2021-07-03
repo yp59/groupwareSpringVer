@@ -16,21 +16,6 @@
 <c:if test="${referrerGroup==null}"><c:set var ="referrerGroup" value=""></c:set></c:if>
 <c:if test="${implementerGroup==null}"><c:set var ="implementerGroup" value=""></c:set></c:if>
 
-<%/*String id = (String) session.getAttribute("id");
-
-String app = request.getParameter("approval");//부서리스트에서 얻은 데이터값을 파라미터로 저장한다.
-String con = request.getParameter("consesus");
-String ref = request.getParameter("reffer");
-String imp = request.getParameter("implementer");
-
-if(app==null){app="";}//아직 부서 리스트 별 결재자 값을 안받아 왔을 때 해당값을 공백으로 설정한다.
-if(con==null){con="";}
-if(ref==null){ref="";}
-if(imp==null){imp="";}
-
-*/
-%>    
-
 <body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

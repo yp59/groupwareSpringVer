@@ -49,4 +49,95 @@ insert into approval values(app_seq.nextval,#{drafter},#{appTitle},#{appContent}
 select max(app_no) from
 			approval where drafter= #{drafter}
 </select>	
+
+<select id = "listPagination" resultType="ApprovalVo" parameterType="map">
+select * from (
+				   select rownum rn ,X.* from(
+				       select  * from(
+				                    select * from(
+				                               select * from(
+				                                       select TMP.* from (
+				                                           select A.*,D.type,E.emp_name from approval A
+				                                             inner join directapp D
+				                                        on D.app_no = A.app_no
+				                                       inner join employees E
+				                                            on A.drafter = E.emp_no
+				                                             where D.approval = #{drafter}
+				                                       )TMP
+				                               )
+				                   ) union all
+			                        select * from(
+			                            select * from(
+			                            select TMP.* from (
+				                           select A.*,I.type,E.emp_name from approval A
+				                           inner join indirectapp I
+				                            on I.app_no = A.app_no
+			                       inner join employees E
+			                            on A.drafter = E.emp_no
+				                            where i.referrer = #{drafter}
+				                      )TMP
+			                   )
+			                )
+			      )order by app_date_start desc 
+			        )X
+				) where rn between #{startRow} and #{endRow}
+</select>
+
+<select id="listCount" resultType="int" parameterType="String"><!-- 검색한 기안서 중 작성한 총 수 -->
+ select count(*) from (
+					select * from(
+					select type from directapp where approval = #{empNo}
+					)union all
+					select type from(
+					select * from indirectapp where referrer = #{empNo})
+					)
+</select>
+
+<select id = "listSearchPagination" resultType="ApprovalVo" parameterType="map">
+select * from (
+				   select rownum rn ,X.* from(
+				       select  * from(
+				                    select * from(
+				                               select * from(
+				                                       select TMP.* from (
+				                                           select A.*,D.type,E.emp_name from approval A
+				                                             inner join directapp D
+				                                        on D.app_no = A.app_no
+				                                       inner join employees E
+				                                            on A.drafter = E.emp_no
+				                                             where D.approval = #{drafter} and instr(A.app_title,#{keyword})>0
+				                                       )TMP
+				                               )
+				                   ) union all
+			                        select * from(
+			                            select * from(
+			                            select TMP.* from (
+				                           select A.*,I.type,E.emp_name from approval A
+				                           inner join indirectapp I
+				                            on I.app_no = A.app_no
+			                       inner join employees E
+			                            on A.drafter = E.emp_no
+				                            where i.referrer = #{drafter} and instr(A.app_title,#{keyword})>0
+				                      )TMP
+			                   )
+			                )
+			      )order by app_date_start desc 
+			        )X
+				) where rn between #{startRow} and #{endRow}
+</select>
+
+<select id="listSearchCount" resultType="int" parameterType="map"><!-- 검색한 기안서 중 작성한 총 수 -->
+ select count(*) from(
+				select * from(
+				select D.app_no from approval A
+							 inner join directapp D
+								on A.app_no = D.app_no
+						where instr(A.app_title,#{keyword})>0 and D.approval = #{empNo})
+				            union all
+				           select * from(
+				select i.app_no from approval A
+							 inner join indirectapp I
+							on A.app_no = I.app_no
+							where instr(A.app_title,#{keyword})>0 and I.referrer = #{empNo}))
+</select>
 </mapper>

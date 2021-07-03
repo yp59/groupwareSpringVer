@@ -86,4 +86,42 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		
 	}
 
+	@Override
+	public List<ApprovalVo> listPagination(String empNo, Pagination pagination) {
+	
+		Map<String, Object> map = new HashMap<>();
+		map.put("drafter",empNo);
+		map.put("startRow",pagination.getStartRow());
+		map.put("endRow", pagination.getEndRow());
+		
+		return sqlSession.selectList("approval.listPagination",map);
+	}
+
+	@Override
+	public int listCount(String empNo) {
+		
+		return sqlSession.selectOne("approval.listCount",empNo);
+	}
+
+	@Override
+	public List<ApprovalVo> listSearchPagination(String empNo, Pagination pagination, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("drafter",empNo);
+		map.put("startRow",pagination.getStartRow());
+		map.put("endRow", pagination.getEndRow());
+		map.put("keyword", keyword);
+		return sqlSession.selectList("approval.listSearchPagination",map);
+	}
+
+	@Override
+	public int listSearchCount(String empNo, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("approval.listSearchCount",map);
+	}
+
 }

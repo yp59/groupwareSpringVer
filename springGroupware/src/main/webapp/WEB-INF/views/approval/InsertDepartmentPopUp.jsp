@@ -3,14 +3,7 @@
 
 <jsp:include page="/WEB-INF/views/template/departmentPopUp.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%/*
-employeesDao employeesdao = new employeesDao();//jquery와 jsp 는 연동이 안되기 때문에(jsp-->jquery는 가능)
-List<employeesDto> insa = employeesdao.list("인사부");//화면을 미리 만들어두고 event에 따라 보여줄지 안보여줄지 선택하는 방식으로 구현
-List<employeesDto> chong = employeesdao.list("총무부");
-List<employeesDto> hwa = employeesdao.list("회계부");
-List<employeesDto> gi = employeesdao.list("기획부");
-List<employeesDto> young = employeesdao.list("영업부");
-*/%>
+
 <body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

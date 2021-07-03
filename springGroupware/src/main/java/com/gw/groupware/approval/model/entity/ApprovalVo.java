@@ -23,6 +23,7 @@ public class ApprovalVo {
 	private int rn;
 	private String empName;
 	private int poNo;
+	private String type;
 	///////approval table////////
 	private int appNo;
 	private String drafter;

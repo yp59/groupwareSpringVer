@@ -146,5 +146,36 @@ public class ApprovalController {
 		return "approval/InsertDepartmentPopUp";
 	}
 	
+	@GetMapping("/approvalList")//페이지네이션 적용한 기안서 작성 메인 페이지 
+	public String approvalList(		@RequestParam(required = false, defaultValue = "1") int pageNo,
+									 @RequestParam(required = false, defaultValue = "5") int pageSize,
+									 @RequestParam(required = false, defaultValue = "") String keyword,
+									 HttpSession session, Model model) {
+		
+	String empNo =(String)session.getAttribute("empNo");
+	Pagination pagination = new Pagination();
+	
+	if(keyword.equals("")) {//검색이 없을 때
+		
+	int ListCount = approvalService.listCount(empNo);
+
+		pagination.pageInfo(pageNo, pageSize, ListCount);		
+
+	model.addAttribute("pagination", pagination);
+	model.addAttribute("list", approvalService.listPagination(empNo, pagination));
+	}
+	else {//검색이 있을 때
+		
+		int listSearchCount = approvalService.listSearchCount(empNo,keyword);
+	
+		pagination.pageInfo(pageNo, pageSize, listSearchCount);	
+		
+	model.addAttribute("pagination", pagination);	
+	model.addAttribute("list", approvalService.listSearchPagination(empNo,pagination,keyword));
+	}
+	
+	return "approval/approvalList";
+	}
+	
 	
 }
