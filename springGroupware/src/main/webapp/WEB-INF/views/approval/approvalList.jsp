@@ -211,5 +211,4 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 		</div>	
 	</div>
 
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
