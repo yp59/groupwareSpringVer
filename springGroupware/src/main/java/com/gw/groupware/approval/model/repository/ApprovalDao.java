@@ -13,4 +13,6 @@ public interface ApprovalDao {
 	int insertListCount(String empNo);//작성한 기안서 수
 	List<ApprovalVo> insertSearchPagination(String empNo, Pagination pagination, String keyword);//작성한 기안서 검색(페이지네이션적용 ㅇ)
 	int insertSearchCount(String empNo,String keyword);//작성한 기안서 수
+	
+	
 }

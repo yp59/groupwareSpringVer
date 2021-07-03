@@ -1,10 +1,13 @@
 package com.gw.groupware.employees.model.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gw.groupware.employees.model.entity.EmployeesDto;
+import com.gw.groupware.employees.model.entity.EmployeesVo;
 
 @Repository
 public class EmployeesDaoImpl implements EmployeesDao{
@@ -17,6 +20,12 @@ public class EmployeesDaoImpl implements EmployeesDao{
 	@Override
 	public EmployeesDto login(EmployeesDto employeesDto) {
 		return sqlSession.selectOne("employees.login",employeesDto);
+	}
+
+	@Override
+	public List<EmployeesVo> departList(String departmentName) {
+		
+		return sqlSession.selectList("employees.departList",departmentName);
 	}
 
 }

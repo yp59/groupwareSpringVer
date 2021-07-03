@@ -16,4 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where emp_no = #{empNo} and emp_pw = #{empPw}
 	</select>
 	
+	<select id="departList" resultType="EmployeesVo" parameterType="String">
+	select E.*,P.posi from
+	employees E inner join
+	position P on E.po_no = P.po_no
+	where department = #{departmentName}
+	</select>
+	
 </mapper>

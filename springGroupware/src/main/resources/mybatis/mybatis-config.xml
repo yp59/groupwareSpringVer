@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	-->
 	<typeAliases>
 		<package name="com.gw.groupware.employees.model.entity"/>
-		<package name="com.gw.groupware.approval.model.entity"/><!-- mybatis Dto나 VO클래스 경로를 설정해줘야 한다. 안하면 404나옴 -->
+		<package name="com.gw.groupware.approval.model.entity"/>
+		<!-- mybatis Dto나 VO클래스 경로를 설정해줘야 한다. 안하면 404나옴 -->
 	</typeAliases>	
 	
 	<!-- 데이터베이스 환경 설정 -->

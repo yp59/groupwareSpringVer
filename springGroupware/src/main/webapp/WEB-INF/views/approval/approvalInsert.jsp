@@ -3,7 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/referencePopUp.jsp"></jsp:include>
-  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="drafter" value="${sessionScope.empNo}"></c:set><!-- 현재 접속한 사원의 회원번호를 drafter로 저장 -->
+
 <%/*String id = (String) session.getAttribute("id");
 
 String app = request.getParameter("approval");//부서리스트에서 얻은 데이터값을 파라미터로 저장한다.
@@ -34,11 +37,8 @@ if(imp==null){imp="";}
     return year + '-' + month + '-' + day;
 	
 	}
-
-
 	var today = getFormatDate(new Date());   
-	
-	
+
 $(function(){//window.load와 같은의미
 	$('input[name=appDateStart]').val(today);//    date로 받은 값 cal을 appDateStart에 넣는다.
 	$('input[name=appDateEnd]').val(today);//    date로 받은 값 cal을 appDateEnd에 넣는다.
@@ -58,8 +58,8 @@ $(function(){//window.load와 같은의미
 	
 	$('input[name=subb]').click(function(){//submit을 누르면 부모창으로 값을 보내고 팝업창 종료
 		window.opener.name = "approvalMain";//부모창 이름 설정
-		document.appForm.target = "approvalMain";//기안서 보낼때 어느 화면으로 갈껀지 선택
-		document.appForm.action = "approvalInsert.gw";//실제 데이터가 보내지는 페이지
+		document.appForm.target = "approvalMain";//기안서 보낼때 어느 화면으로 갈건지 선택
+		document.appForm.action = "approvalInsert";//실제 데이터가 보내지는 페이지
 		document.appForm.submit();
 		self.close();//지금 보고있는 창은 종료된다.
 	});
@@ -68,25 +68,21 @@ $(function(){//window.load와 같은의미
 	
 });
 </script>
-	<!-- 가장 바깥 영역 -->
-<main>
-		
-		<!-- 사이드영역 -->
 
-		<!-- 컨텐츠영역 -->
+<main>
 	<section>
 		<form name = "appForm" method ="post" class = "fon-color">
 			<div>
-				<input type="hidden" name ="drafter" value="${drafter}"><!-- 기안자 hidden으로 전송 -->
+				 <input type="hidden" name ="drafter" value="${drafter}">
 					기안일  <input type = "date" name = "appDateStart" ><br><br>
 			</div>
 			
 			<div>
-					결재자 <input type = "text" class="appPeople design" name = "approvalNo" value="${approval}"><br>
-					합의자 <input type = "text" class="appPeople design" name = "consesusNo" value="${consesus}"><br> 
-					참조자 <input type = "text" class="appPeople design" name = "refferNo" value="${refferer}"><br>
-					시행자 <input type = "text" class="appPeople design" name = "implemneterNo" value="${implementer}"><br><br>
-				<!-- 숫자는 servlet에서 처리-->
+					결재자 <input type = "text" class="appPeople design" name = "approvalGroup" value="${approvalGroup}"><br><!-- approvalNo로 이름 지었는데 Vo통일성을 위해서 No지움 -->
+					합의자 <input type = "text" class="appPeople design" name = "consesusGroup" value="${consesusGroup}"><br> 
+					참조자 <input type = "text" class="appPeople design" name = "refferGroup" value="${reffererGroup}"><br>
+					시행자 <input type = "text" class="appPeople design" name = "implementerGroup" value="${implementerGroup}"><br><br>
+			
 			</div>
 			
 			<div>

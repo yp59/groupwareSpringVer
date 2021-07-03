@@ -16,7 +16,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApprovalVo {
 
+	
+	/////common/////////////////
 	private int rn;
+	private String empName;
+	private int poNo;
+	///////approval table////////
 	private int appNo;
 	private String drafter;
 	private String appTitle;
@@ -24,12 +29,25 @@ public class ApprovalVo {
 	private String appDateStart;
 	private String appDateEnd;
 	private String appState;
-	private String empName;
-	private String dirType;
+	/////////dirtable//////////////
+	private int approvalNo;
+	//private int appNo;
+	private String approval;//들어올땐 &로 들어온다.
 	private String consesus;
+	private String dirType;
 	private String app_date;
-	private int poNo;
+	
+	/////////indirtable////////////////
+	private int referrerNo;
+	//private int appNo;
+	private String refferrer;
+	private String implemneter;// 일부러 오타냄
 	private String indirType;
-	private String approval;
-	private List<ApprovalVo> list;//list를 뽑으려면 Vo로 넣어줘야한다?? 생성자필요?????
+	
+	////////???????/////////일단 남겨둠
+	//private String approval;
+	//private String consesus;
+	
+	
+	private List<ApprovalVo> list;//list를 뽑으려면 Vo로 넣어줘야한다
 }
