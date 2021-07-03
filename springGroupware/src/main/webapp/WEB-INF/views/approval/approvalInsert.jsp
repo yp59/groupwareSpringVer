@@ -6,6 +6,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="drafter" value="${sessionScope.empNo}"></c:set><!-- 현재 접속한 사원의 회원번호를 drafter로 저장 -->
+<c:set var="approvalGroup" value="${param.approval}"></c:set>
+<c:set var="consesusGroup" value="${param.consesus}"></c:set>
+<c:set var="referrerGroup" value="${param.reffer}"></c:set>
+<c:set var="implementerGroup" value="${param.implementer}"></c:set>
 
 <%/*String id = (String) session.getAttribute("id");
 
@@ -80,7 +84,7 @@ $(function(){//window.load와 같은의미
 			<div>
 					결재자 <input type = "text" class="appPeople design" name = "approvalGroup" value="${approvalGroup}"><br><!-- approvalNo로 이름 지었는데 Vo통일성을 위해서 No지움 -->
 					합의자 <input type = "text" class="appPeople design" name = "consesusGroup" value="${consesusGroup}"><br> 
-					참조자 <input type = "text" class="appPeople design" name = "refferGroup" value="${reffererGroup}"><br>
+					참조자 <input type = "text" class="appPeople design" name = "refferGroup" value="${referrerGroup}"><br>
 					시행자 <input type = "text" class="appPeople design" name = "implementerGroup" value="${implementerGroup}"><br><br>
 			
 			</div>

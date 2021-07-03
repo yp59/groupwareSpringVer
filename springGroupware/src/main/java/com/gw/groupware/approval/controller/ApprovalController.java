@@ -86,12 +86,7 @@ public class ApprovalController {
 	*/
 	@GetMapping("/InsertDepartmentPopUp")
 	public String InsertDepartmentPopUp(Model model) {
-	/*	List<EmployeesVo> insa = employeesService.departList("인사부");
-		List<EmployeesVo> chong = employeesService.departList("총무부");
-		List<EmployeesVo> hwa = employeesService.departList("회계부");
-		List<EmployeesVo> gi = employeesService.departList("기획부");
-		List<EmployeesVo> young = employeesService.departList("영업부");
-		*/
+
 		model.addAttribute("insa", employeesService.departList("인사부"));
 		model.addAttribute("chong", employeesService.departList("총무부"));
 		model.addAttribute("hwa", employeesService.departList("회계부"));
