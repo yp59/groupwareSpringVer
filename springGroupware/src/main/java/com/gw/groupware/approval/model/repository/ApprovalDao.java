@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.gw.groupware.approval.model.entity.ApprovalDto;
 import com.gw.groupware.approval.model.entity.ApprovalVo;
 import com.gw.groupware.approval.model.entity.DirectappDto;
+import com.gw.groupware.approval.model.entity.DirectappVo;
 import com.gw.groupware.approval.model.entity.IndirectappDto;
 import com.gw.groupware.common.Pagination;
 
@@ -29,4 +30,13 @@ public interface ApprovalDao {
 		List<ApprovalVo> listSearchPagination(String empNo, Pagination pagination, String keyword);//결재할 기안서 검색(페이지네이션적용 ㅇ)
 		int listSearchCount(String empNo,String keyword);//검색 중 결재 해야하는 기안서 수
 	
+	//기안서 자세히 보기
+			//기안서 문서 목록 보기
+			ApprovalDto appdraftDoc(int appNo);
+			List<DirectappDto> dirdraftDoc(int appNo);
+			List<IndirectappDto> indirdraftDoc(int appNo);
+			//기안서 결재 순서 
+			DirectappVo sequence(int appNo,String id);//내 결재 순서
+			List<DirectappVo> sequence(int appNo);//해당 기안서 전체 결재 순서
+		
 }

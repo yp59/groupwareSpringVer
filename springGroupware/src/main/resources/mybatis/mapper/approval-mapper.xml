@@ -140,4 +140,11 @@ select * from (
 							on A.app_no = I.app_no
 							where instr(A.app_title,#{keyword})>0 and I.referrer = #{empNo}))
 </select>
+
+<select id="appdraftDoc" resultType="ApprovalDto" parameterType="int">
+select A.*,E.emp_name from approval A
+			inner join employees E
+			on A.drafter = E.emp_no
+			where app_no = #{appNo}
+</select>
 </mapper>

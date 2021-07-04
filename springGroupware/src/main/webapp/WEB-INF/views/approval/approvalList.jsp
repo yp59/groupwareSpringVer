@@ -3,79 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="isSearch" value="${not empty param.keyword}"></c:set>
-<%/*
-	String id = (String) session.getAttribute("id");
 
-	String keyword = request.getParameter("keyword");
-	
-	boolean isSearch = keyword!=null&&!keyword.trim().equals("");
-	
-	//////////////////////////페이지네이션/////////////////////////
-	
-	int pageNo;
-	
-	try{
-		pageNo =Integer.parseInt(request.getParameter("pageNo"));
-		if(pageNo<1){
-			throw new Exception();
-		}
-		
-		
-	}catch(Exception e){
-		pageNo = 1;//기본 페이지
-	}
-	
-	int pageSize;
-	try{
-		pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		if(pageSize < 10){
-			throw new Exception();
-		}
-	}
-	catch(Exception e){
-		pageSize = 5;//페이지당 게시글 수 설정
-	}
-	//rownum의 시작번호와 종료번호를 계산
-	int startRow = pageNo * pageSize - (pageSize-1);
-	int endRow = pageNo * pageSize;
-	///////////////////////////페이지네이션///////////////////////////
-	
-	
-	approvalDao approvaldao = new approvalDao();
-	List<approvalDto> list ;
-
-	if(isSearch){//검색 시 기안서 리스트 출력
-		list = approvaldao.approvalMainSearch(id, keyword, startRow, endRow);
-		
-	}
-	else{//일반 기안서 출력
-		list = approvaldao.approvalMainList(id, startRow, endRow);
-	}
-	/////////////////////////////////////////////////////////////////////
-	// 페이지 네비게이션 영역 계산
-	/////////////////////////////////////////////////////////////////////
-	// = 하단에 표시되는 숫자 링크의 범위를 페이지번호를 기준으로 계산하여 설정
-	// = 하단 네비게이션 숫자는 startBlock 부터 endBlock 까지 출력
-	// = (주의사항) 게시글 개수를 구해서 마지막 블록 번호를 넘어가지 않도록 처리
-	int count;
-	if(isSearch){
-	
-	count = approvaldao.getMainCount(id, keyword);
-	}
-	else{
-	count = approvaldao.getMainCount(id);
-	}
-	int blockSize = 10;
-	int lastBlock = (count + pageSize - 1) / pageSize;
-	//int lastBlock = (count - 1) / pageSize + 1;
-	int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
-	int endBlock = startBlock + blockSize - 1;
-	
-	if(endBlock > lastBlock){//범위를 벗어나면
-	endBlock = lastBlock;//범위를 수정
-	
-	}*/
-%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/section.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -105,38 +33,6 @@
 	});
 </script>
 
-<script>
-
-$(function(){
-	
-/*
-	////////////////////////////////////////////////////////////////////////
-	var _width = '700';
-    var _height = '700';
- 
-    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
-    var _left = Math.ceil(( window.screen.width - _width )/2);
-    var _top = Math.ceil(( window.screen.height - _height )/2);
-    
-var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top ;
-	$("#approvalDetail").click(function(){
-		
-		   var pop_title = "appDetail" ;//팝업 이름 설정
-		   window.open("approvalDetail.jsp",pop_title,option);//어느 jsp를 열고 팝업의 이름은 무엇이며 어떤 옵션을 줄것인지 설정 
-		    
-		   document.popUpDetail.target = pop_title;//popUPname과 target의 이름은 동일해야한다?
-		    document.popUpDetail.action = "approvalDetail.jsp" ;//어떤 페이지로 데이터를 보낼지 설정  
-		    popUpDetail.submit() ;     //form의 submit을 선언해줌
-		    
-		    
-	});
-///////////////////////////////////////////////////////////////////////////////
-*/
-		
-	
-	
-});
-</script>
 <div class = "container-1200">
 <div style="text-align: center; border-bottom: 2px solid rgb(102, 177, 227); margin-bottom: 10px;">
 <h2>나의 결재 목록</h2>
@@ -171,7 +67,8 @@ var option ='width='+ _width +', height='+ _height +', left=' + _left + ', top='
 					<td>${approvalVo.appNo}</td>
 					<td>${approvalVo.type}</td>
 					<td>
-					<a href="${pageContext.request.contextPath}/#"  
+					<a href="${pageContext.request.contextPath}/approval/approvalDetail?appNo=
+					${approvalVo.appNo}&dirType=${approvalVo.type}&appStateG=${approvalVo.appState}"   
 					onclick="window.name = 'appList'; window.open(this.href, '_blank', 'width=750, height=750'); return false;">
 					<!-- 기안서에 현재 선택한 appNo을 보내는 구문 -->	
 					${approvalVo.appTitle}</a>	

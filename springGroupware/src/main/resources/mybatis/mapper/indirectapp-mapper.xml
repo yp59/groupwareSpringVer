@@ -28,5 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			사용법 : #{데이터}
 	 -->
 
-	
+<select id="indirdraftDoc" resultType="IndirectappDto" parameterType="int">
+select I.*,E.emp_name from indirectapp I
+		inner join employees E
+		on I.referrer = E.emp_no
+		where app_no = #{appNo}
+		order by po_no,join_date
+</select>	
 </mapper>

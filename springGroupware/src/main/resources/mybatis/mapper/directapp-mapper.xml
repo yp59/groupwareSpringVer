@@ -28,5 +28,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			사용법 : #{데이터}
 	 -->
 
-	
+<select id="dirdraftDoc" resultType="DirectappDto" parameterType="int">
+select D.*, E.emp_name from
+	directapp D inner join employees E
+	on D.approval = E.emp_no
+	where D.app_no = #{appNo}
+	order by po_no,join_date
+</select>
+<select id="sequence1" parameterType="map">
+select * from (
+			 select rownum rn,TMP.* from(
+			  select * from(
+			       select D.*, E.po_no, E.join_date from directapp D
+			      inner join employees E
+			     on D.approval = E.emp_no
+			     where D.app_no =#{appNo} and consesus ='1'
+			      order by po_no desc, join_date desc)
+			     union all
+			select * from
+			    ( select D.*, E.po_no, E.join_date from directapp D
+			     inner join employees E
+			     on D.approval = E.emp_no
+			      where D.app_no =#{appNo} and consesus ='0'
+			    order by po_no desc, join_date desc)
+			    )
+			 TMP) where approval = #{id}
+</select>
+<select id="sequence2" parameterType="int">
+select * from (
+			 select rownum rn,TMP.* from(
+			  select * from(
+			       select D.*, E.po_no, E.join_date from directapp D
+			      inner join employees E
+			     on D.approval = E.emp_no
+			     where D.app_no =#{appNo} and consesus ='1'
+			      order by po_no desc, join_date desc)
+			     union all
+			select * from
+			    ( select D.*, E.po_no, E.join_date from directapp D
+			     inner join employees E
+			     on D.approval = E.emp_no
+			      where D.app_no =#{appNo} and consesus ='0'
+			    order by po_no desc, join_date desc)
+			    )
+			 TMP)
+</select>	
 </mapper>

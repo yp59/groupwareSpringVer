@@ -37,7 +37,7 @@ public class ApprovalVo {
 	//private int appNo;
 	private String approval;//들어올땐 &로 들어온다.
 	private String consesus;
-	private String dirType;
+	//private String dirType;
 	private String app_date;
 	
 	/////////indirtable////////////////
@@ -45,7 +45,7 @@ public class ApprovalVo {
 	//private int appNo;
 	private String refferrer;
 	private String implemneter;// 일부러 오타냄
-	private String indirType;
+	//private String indirType;
 	
 	////////???????/////////일단 남겨둠
 	//private String approval;

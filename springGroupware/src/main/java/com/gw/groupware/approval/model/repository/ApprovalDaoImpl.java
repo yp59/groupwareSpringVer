@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.gw.groupware.approval.model.entity.ApprovalDto;
 import com.gw.groupware.approval.model.entity.ApprovalVo;
 import com.gw.groupware.approval.model.entity.DirectappDto;
+import com.gw.groupware.approval.model.entity.DirectappVo;
 import com.gw.groupware.approval.model.entity.IndirectappDto;
 import com.gw.groupware.common.Pagination;
 import com.gw.groupware.employees.model.entity.EmployeesDto;
@@ -122,6 +123,41 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectOne("approval.listSearchCount",map);
+	}
+
+	@Override
+	public ApprovalDto appdraftDoc(int appNo) {
+		
+		return sqlSession.selectOne("approval.appdraftDoc",appNo);
+	}
+
+	@Override
+	public List<DirectappDto> dirdraftDoc(int appNo) {
+	
+		return sqlSession.selectList("directapp.dirdraftDoc",appNo);
+	}
+
+	@Override
+	public List<IndirectappDto> indirdraftDoc(int appNo) {
+		
+		return sqlSession.selectList("indirectapp.indirdraftDoc",appNo);
+	}
+
+	@Override
+	public DirectappVo sequence(int appNo, String id) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("appNo", appNo);
+		map.put("id", id);
+		
+		
+		return sqlSession.selectOne("directapp.sequence1",map);
+	}
+
+	@Override
+	public List<DirectappVo> sequence(int appNo) {
+	
+		return sqlSession.selectList("directapp.sequence2",appNo);
 	}
 
 }

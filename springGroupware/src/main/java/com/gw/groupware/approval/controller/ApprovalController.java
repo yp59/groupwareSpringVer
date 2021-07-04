@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gw.groupware.approval.model.entity.ApprovalDto;
 import com.gw.groupware.approval.model.entity.ApprovalVo;
 import com.gw.groupware.approval.model.entity.DirectappDto;
+import com.gw.groupware.approval.model.entity.DirectappVo;
 import com.gw.groupware.approval.model.entity.IndirectappDto;
 import com.gw.groupware.approval.model.repository.ApprovalDao;
 import com.gw.groupware.approval.model.service.ApprovalService;
@@ -177,5 +178,155 @@ public class ApprovalController {
 	return "approval/approvalList";
 	}
 	
+	
+	
+	
+	
+	@GetMapping("/approvalDetail")
+	public String approvalDetail(HttpSession session,
+								@RequestParam int appNo,
+								@RequestParam String dirType,
+								@RequestParam String appStateG,
+								Model model
+								) {
+		
+		String id = (String) session.getAttribute("empNo");
+			
+		//이미 위에서 선언함int appNo = Integer.parseInt(request.getParameter("appNo"));//결재 리스트에서 어떤 페이지를 눌렀는지 appNo를 가져온다.	
+		 //이미 위에서 선언함String dirType = request.getParameter("DirType");//type을 가져와서 이미 결재를 한 상태이면 버튼을 없앤다.
+			
+		
+		 boolean appState = appStateG.equals("중지");
+		 boolean isApproval = !dirType.equals("미결");//미결이 아니면 ture값을 설정해 버튼을 없앤다.
+
+		 ///////////////////////////////////////////////////////////기안서 내용을 출력할 저장 객체 선언
+		
+		 ApprovalDto draftapp = approvalService.appdraftDoc(appNo);//approval table에서 기안서에 출력시킬 데이터 저장
+
+		
+		 List<IndirectappDto> draftindir = approvalService.indirdraftDoc(appNo);//indirectapp table에서 기안서에 출력시킬 데이터 저장
+
+		 
+		 List<DirectappDto> draftdir = approvalService.dirdraftDoc(appNo);//directapp table에서 기안서에 출력시킬 데이터 저장
+
+		 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+		 DirectappVo mysequence = approvalService.sequence(appNo, id);//내 결재 순서
+
+		 List<DirectappVo> allSequence =approvalService.sequence(appNo);//전체 결재 순서
+		 //list 사이즈로 전체 결재 크기를 알아낸 후 위치를 알아보자
+
+		 int appSize = allSequence.size();//전체 결재 수
+		 int appsizetest = appSize;
+
+		 String appEndDate ="";
+		 boolean isConsesus =true;
+		  String state = "기결";
+		  
+		 if(mysequence.getConsesus()==null){
+		 	
+		 }
+		 else{
+		 if(mysequence.getConsesus().equals("0")){//내 결재 유형이 합의자인지 결재자인지에 따라 결재 순서를 잰다.
+		 	
+		 	isConsesus = false;
+		 	
+		 ////////////////////////////////예결은 제일 먼저//////////////////////////////////////////
+		 	int conSize1 =0;//합의자 수 세는 변수
+		 	for(DirectappVo x : allSequence){
+		 		 
+		 		if(x.getConsesus().equals("1")){//합의자는 결재순서와 상관없이 모두 합의하면 결재 넘어간다.
+		 			conSize1+=1;//합의자 수당 conSize 증가
+		 			continue;
+		 			}
+		 		
+		 			
+		 			if(mysequence.getRowNo()-1==conSize1){break;}//만약 내 결재 순서에서 -1을 한값이 합의자의 수와 같다면
+		 			//지금의 나는 첫 결재자이므로 예결없이 무조건 기결 후결이다.
+		 			
+		 			if(x.getAppDate()==null){//내 순서 앞의 결재자가 결재를 하지 않았으면
+		 				state = "예결";
+		 				//예결버튼만 생긴다.
+		 				break;
+
+		 			}
+		 	}
+		 /////////////////////////////////기결은 내순서가 돼었을 때 앞의 결재자가 결재를 다 했으면///////////////////// 
+		 int fitCount =0;//밖에서 선언해줘야 값이 증가한다.
+		 int conSize2 =0;//합의자 수 세는 변수
+		 for(DirectappVo x : allSequence){
+		 	
+		 	if(x.getConsesus().equals("1")){//합의자는 결재순서와 상관없이 모두 합의하면 결재 넘어간다.
+		 		conSize2+=1;//합의자 수당 conSize 증가
+		 		continue;
+		 		}
+		 	
+		 	if(mysequence.getRowNo()-1==conSize2){break;}//만약 내 결재 순서에서 -1을 한값이 합의자의 수와 같다면
+		 	//지금의 나는 첫 결재자이므로 예결없이 무조건 기결 후결이다.
+		 		
+		 	
+		 		if(x.getAppDate()!=null){//결재를 했으면
+		 		
+		 			fitCount+=1;
+		 		
+		 			if(fitCount==mysequence.getRowNo()-1-conSize2){//내 순서 앞의 결재자까지 조회한 후 모두 결재 했으면
+		 				state = "기결";//위의 구문을 만족하지 않았을 경우에는 내차례가 맞으므로 기결이다.
+		 				break;
+		 			}
+		 			
+		 		}	
+		 }
+		 ////////////////////////후결 라인은 젤 마지막에 넣어서 앞의 조건 무시하고 후결이 우선순위가 되어야 한다/////////////////
+		 	int conSize3 =0;//합의자 수 세는 변수
+		 	for(DirectappVo x : allSequence){
+		 		
+		 		if(x.getConsesus().equals("1")){//합의자는 결재순서와 상관없이 모두 합의하면 결재 넘어간다.
+		 			conSize3+=1;//합의자 수당 conSize 증가
+		 			continue;
+		 			}
+		 		
+		 		if(mysequence.getRowNo()-1==conSize3){break;}//만약 내 결재 순서에서 -1을 한값이 합의자의 수와 같다면
+		 		//지금의 나는 첫 결재자이므로 예결없이 무조건 기결 후결이다.
+		 			
+		 			if(mysequence.getRowNo()<x.getRowNo()){//내 순서가 현재 검사하는 전체 결재 순서보다 값이 작을때
+		 				if(x.getAppDate()!=null){//뒤의 결재자가 결재를 했으면
+		 					 state ="후결"; 
+		 					//후결해야 한다.
+		 					break;
+		 				}
+		 			}
+		 		}
+		 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+		 for(DirectappVo x : allSequence){	//결재자가 모두 결재했을경우 결재일 표시
+		 	 int appCount =0;
+		 			if(x.getAppDate()!=null){//결재한 사람 수를 센다
+		 				appCount++;
+		 			}
+		 	
+		 	if(appCount==appSize){//전체 결재자 수와 결재한 사람 수가 같으면 appEndDate에 최종 결재자 결재일을 저장
+		 		appEndDate = x.getAppDate();
+		 	}
+		 }
+		 	
+		 }
+
+		 else{
+		 	
+		 	isConsesus = true;//getConsesus의 값이 "1"(합의자)이므로 해당 기안서를 열어보는 '나'는 합의자이다.
+		 }
+		 }
+		model.addAttribute("isApproval", isApproval);
+		model.addAttribute("isConsesus", isConsesus);
+		model.addAttribute("appState", appState);
+		model.addAttribute("state", state);
+		model.addAttribute("appNo", appNo);
+		model.addAttribute("draftapp", draftapp);
+		model.addAttribute("draftdir", draftdir);
+		model.addAttribute("draftindir", draftindir);
+		
+		return "approval/approvalDetail";
+	}
 	
 }

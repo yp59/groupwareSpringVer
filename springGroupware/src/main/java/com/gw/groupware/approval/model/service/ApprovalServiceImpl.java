@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.gw.groupware.approval.model.entity.ApprovalDto;
 import com.gw.groupware.approval.model.entity.ApprovalVo;
 import com.gw.groupware.approval.model.entity.DirectappDto;
+import com.gw.groupware.approval.model.entity.DirectappVo;
 import com.gw.groupware.approval.model.entity.IndirectappDto;
 import com.gw.groupware.approval.model.repository.ApprovalDao;
 import com.gw.groupware.common.Pagination;
@@ -88,6 +89,36 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public int listSearchCount(String empNo, String keyword) {
 	
 		return approvalDao.listSearchCount(empNo, keyword);
+	}
+
+	@Override
+	public ApprovalDto appdraftDoc(int appNo) {
+		// TODO Auto-generated method stub
+		return approvalDao.appdraftDoc(appNo);
+	}
+
+	@Override
+	public List<DirectappDto> dirdraftDoc(int appNo) {
+		// TODO Auto-generated method stub
+		return approvalDao.dirdraftDoc(appNo);
+	}
+
+	@Override
+	public List<IndirectappDto> indirdraftDoc(int appNo) {
+		// TODO Auto-generated method stub
+		return approvalDao.indirdraftDoc(appNo);
+	}
+
+	@Override
+	public DirectappVo sequence(int appNo, String id) {
+		// TODO Auto-generated method stub
+		return approvalDao.sequence(appNo, id);
+	}
+
+	@Override
+	public List<DirectappVo> sequence(int appNo) {
+		// TODO Auto-generated method stub
+		return approvalDao.sequence(appNo);
 	}
 
 }
